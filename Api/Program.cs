@@ -18,11 +18,14 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-// Inicializar y sembrar base de datos si está vacía
-using (var scope = app.Services.CreateScope())
+// Inicializar y sembrar base de datos si está vacía (omitir en pruebas)
+if (!app.Environment.IsEnvironment("Testing"))
 {
-    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    await DbInitializer.SeedAsync(context);
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        await DbInitializer.SeedAsync(context);
+    }
 }
 
 // Configure the HTTP request pipeline.
@@ -36,3 +39,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

@@ -8,19 +8,20 @@ public class User : Entity<UserId>
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public Email Email { get; private set; }
+    public bool IsDeleted { get; private set; }
 
-    private User(UserId id, string firstName, string lastName, Email email)
-        : base(id)
+    private User(UserId id, string firstName, string lastName, Email email) : base(id)
     {
         FirstName = firstName;
         LastName = lastName;
         Email = email;
+        IsDeleted = false;
     }
 
     // Requerido por EF Core
-#pragma warning disable CS8618
-    private User() { }
-#pragma warning restore CS8618
+    #pragma warning disable CS8618
+    private User() {}
+    #pragma warning restore CS8618
 
     public static User Create(string firstName, string lastName, Email email)
     {
@@ -48,5 +49,10 @@ public class User : Entity<UserId>
         FirstName = firstName;
         LastName = lastName;
         Email = email;
+    }
+
+    public void Delete()
+    {
+        IsDeleted = true;
     }
 }
