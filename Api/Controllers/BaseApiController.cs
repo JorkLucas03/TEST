@@ -9,6 +9,6 @@ public abstract class BaseApiController : ControllerBase
 {
     private ISender? _mediator;
 
-    protected ISender Mediator => 
+    protected ISender Mediator =>
         _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
 }

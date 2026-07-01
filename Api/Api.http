@@ -1,6 +1,31 @@
 @Api_HostAddress = http://localhost:5232
 
-GET {{Api_HostAddress}}/weatherforecast/
+GET {{Api_HostAddress}}/api/usuarios
 Accept: application/json
 
 ###
+GET {{Api_HostAddress}}/api/productos
+Accept: application/json
+
+###
+POST {{Api_HostAddress}}/api/usuarios
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "Rosalia",
+  "lastName": "Hernandez",
+  "email": "rosalia.hernandez@example.com"
+}
+
+###
+POST {{Api_HostAddress}}/api/productos
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Producto de prueba",
+  "description": "Creado desde Api.http",
+  "priceAmount": 25.50,
+  "priceCurrency": "USD"
+}

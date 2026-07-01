@@ -3,6 +3,4 @@ using Vogen;
 namespace Api.Domain.ValueObjects;
 
 [ValueObject<Guid>(conversions: Conversions.EfCoreValueConverter | Conversions.SystemTextJson)]
-public partial struct ProductId
-{
-}
+public partial struct ProductId { }

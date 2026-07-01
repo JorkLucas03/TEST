@@ -11,7 +11,8 @@ public class Product : Entity<ProductId>
     public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
 
-    private Product(ProductId id, string name, string description, Money price) : base(id)
+    private Product(ProductId id, string name, string description, Money price)
+        : base(id)
     {
         Name = name;
         Description = description;
@@ -21,14 +22,17 @@ public class Product : Entity<ProductId>
     }
 
     // Constructor requerido por EF Core
-    #pragma warning disable CS8618
-    private Product() {}
-    #pragma warning restore CS8618
+#pragma warning disable CS8618
+    private Product() { }
+#pragma warning restore CS8618
 
     public static Product Create(string name, string description, Money price)
     {
         if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException("El nombre del producto no puede estar vacío.", nameof(name));
+            throw new ArgumentException(
+                "El nombre del producto no puede estar vacío.",
+                nameof(name)
+            );
 
         return new Product(ProductId.From(Guid.NewGuid()), name, description, price);
     }

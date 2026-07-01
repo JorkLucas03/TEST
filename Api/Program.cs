@@ -12,6 +12,7 @@ builder.AddSqlServerDbContext<ApplicationDbContext>("bd");
 builder.Services.AddFeatures();
 
 builder.Services.AddControllers();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -30,11 +31,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
-

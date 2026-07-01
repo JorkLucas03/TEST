@@ -11,7 +11,10 @@ public record Money
             throw new ArgumentException("El monto no puede ser negativo.", nameof(amount));
 
         if (string.IsNullOrWhiteSpace(currency) || currency.Length != 3)
-            throw new ArgumentException("La moneda debe tener exactamente 3 caracteres.", nameof(currency));
+            throw new ArgumentException(
+                "La moneda debe tener exactamente 3 caracteres.",
+                nameof(currency)
+            );
 
         Amount = amount;
         Currency = currency;

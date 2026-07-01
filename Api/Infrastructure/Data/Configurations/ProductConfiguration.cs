@@ -12,29 +12,32 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.HasKey(p => p.Id);
 
         // Configurar el ValueConverter generado por Vogen para ProductId
-        builder.Property(p => p.Id)
+        builder
+            .Property(p => p.Id)
             .HasConversion<ProductId.EfCoreValueConverter>()
             .ValueGeneratedNever();
 
-        builder.Property(p => p.Name)
-            .HasMaxLength(150)
-            .IsRequired();
+        builder.Property(p => p.Name).HasMaxLength(150).IsRequired();
 
-        builder.Property(p => p.Description)
-            .HasMaxLength(500);
+        builder.Property(p => p.Description).HasMaxLength(500);
 
         // Mapear el ValueObject Money de manera embebida (Owned Types)
-        builder.OwnsOne(p => p.Price, price =>
-        {
-            price.Property(m => m.Amount)
-                .HasColumnName("PriceAmount")
-                .HasPrecision(18, 2)
-                .IsRequired();
+        builder.OwnsOne(
+            p => p.Price,
+            price =>
+            {
+                price
+                    .Property(m => m.Amount)
+                    .HasColumnName("PriceAmount")
+                    .HasPrecision(18, 2)
+                    .IsRequired();
 
-            price.Property(m => m.Currency)
-                .HasColumnName("PriceCurrency")
-                .HasMaxLength(3)
-                .IsRequired();
-        });
+                price
+                    .Property(m => m.Currency)
+                    .HasColumnName("PriceCurrency")
+                    .HasMaxLength(3)
+                    .IsRequired();
+            }
+        );
     }
 }

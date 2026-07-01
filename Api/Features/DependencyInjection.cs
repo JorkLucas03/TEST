@@ -10,9 +10,10 @@ public static class DependencyInjection
         var assembly = typeof(DependencyInjection).Assembly;
 
         // Registrar MediatR
-        services.AddMediatR(configuration => 
+        services.AddMediatR(configuration =>
         {
             configuration.RegisterServicesFromAssembly(assembly);
+            configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
 
         // Registrar todos los validadores de FluentValidation en el assembly

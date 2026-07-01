@@ -9,7 +9,8 @@ public class User : Entity<UserId>
     public string LastName { get; private set; }
     public Email Email { get; private set; }
 
-    private User(UserId id, string firstName, string lastName, Email email) : base(id)
+    private User(UserId id, string firstName, string lastName, Email email)
+        : base(id)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -17,9 +18,9 @@ public class User : Entity<UserId>
     }
 
     // Requerido por EF Core
-    #pragma warning disable CS8618
-    private User() {}
-    #pragma warning restore CS8618
+#pragma warning disable CS8618
+    private User() { }
+#pragma warning restore CS8618
 
     public static User Create(string firstName, string lastName, Email email)
     {
